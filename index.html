@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fabric Tools Hub</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #f5f7fa;
+}
+
+/* Topbar */
+.topbar {
+  height: 60px;
+  background: #0078d4;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+/* Layout */
+.container {
+  display: flex;
+  height: calc(100vh - 60px);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background: #111827;
+  color: white;
+  padding: 15px;
+}
+
+.sidebar h3 {
+  margin-top: 0;
+}
+
+.nav-item {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.nav-item:hover {
+  background: #1f2937;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  background: #e5e7eb;
+  border-bottom: 1px solid #ccc;
+}
+
+.tab {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: white;
+  border-bottom: 3px solid #0078d4;
+}
+
+/* iframe area */
+.viewer {
+  flex: 1;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Home cards */
+.home {
+  padding: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <h2>Fabric Tools Hub</h2>
+  <div>👤 User</div>
+</div>
+
+<div class="container">
+  
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>Tools</h3>
+    <div class="nav-item" onclick="openApp('migration')">Power BI Migration</div>
+    <div class="nav-item" onclick="openApp('security')">Fabric Role Assignment</div>
+    <div class="nav-item" onclick="openApp('estimator')">Project Estimator</div>
+    <div class="nav-item" onclick="openApp('requirements')">Requirements App</div>
+    <div class="nav-item" onclick="openApp('capacity')">Capacity Calculator</div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    
+    <!-- Tabs -->
+    <div class="tabs" id="tabs"></div>
+
+    <!-- Viewer -->
+    <div class="viewer" id="viewer">
+      <div class="home">
+        <h2>Welcome</h2>
+        <div class="grid">
+          <div class="card" onclick="openApp('migration')">Power BI Migration</div>
+          <div class="card" onclick="openApp('security')">Fabric Role Assignment</div>
+          <div class="card" onclick="openApp('estimator')">Project Estimator</div>
+          <div class="card" onclick="openApp('requirements')">Requirements App</div>
+          <div class="card" onclick="openApp('capacity')">Capacity Calculator</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const apps = {
+  migration: {
+    name: "Migration",
+    url: "https://qubexon-pl.github.io/ptofmigration/"
+  },
+  security: {
+    name: "Security",
+    url: "https://qubexon-pl.github.io/fabricrolesassigment/"
+  },
+  estimator: {
+    name: "Estimator",
+    url: "https://qubexon-pl.github.io/estimate/"
+  },
+  requirements: {
+    name: "Requirements",
+    url: "https://qubexon-pl.github.io/requirementsapp/"
+  },
+  capacity: {
+    name: "Capacity",
+    url: "https://qubexon-pl.github.io/calculatorfabric/"
+  }
+};
+
+let openTabs = [];
+let activeTab = null;
+
+function openApp(id) {
+  if (!openTabs.includes(id)) {
+    openTabs.push(id);
+  }
+  activeTab = id;
+  render();
+}
+
+function render() {
+  const tabsEl = document.getElementById("tabs");
+  const viewer = document.getElementById("viewer");
+
+  // Render Tabs
+  tabsEl.innerHTML = "";
+  openTabs.forEach(id => {
+    const tab = document.createElement("div");
+    tab.className = "tab" + (id === activeTab ? " active" : "");
+    tab.innerText = apps[id].name;
+    tab.onclick = () => {
+      activeTab = id;
+      render();
+    };
+    tabsEl.appendChild(tab);
+  });
+
+  // Render iframe
+  viewer.innerHTML = "";
+  if (activeTab) {
+    const iframe = document.createElement("iframe");
+    iframe.src = apps[activeTab].url;
+    viewer.appendChild(iframe);
+  }
+}
+</script>
+
+</body>
+</html>
