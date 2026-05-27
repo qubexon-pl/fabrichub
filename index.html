@@ -6,175 +6,273 @@
 <title>Fabric Tools Hub</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: #f5f7fa;
+:root {
+  --bg: #0f172a;
+  --surface: #111827;
+  --surface-alt: #1f2937;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-strong: #0ea5e9;
 }
 
-/* Topbar */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Inter", sans-serif;
+  background: radial-gradient(circle at top, #1e293b 0%, #020617 60%);
+  color: var(--text);
+}
+
 .topbar {
-  height: 60px;
-  background: #0078d4;
+  height: 64px;
+  background: rgba(2, 6, 23, 0.85);
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 22px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+  backdrop-filter: blur(6px);
 }
 
-/* Layout */
+.brand {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.15);
+  color: #7dd3fc;
+}
+
 .container {
   display: flex;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 64px);
 }
 
-/* Sidebar */
 .sidebar {
-  width: 240px;
-  background: #111827;
-  color: white;
-  padding: 15px;
+  width: 280px;
+  background: rgba(15, 23, 42, 0.9);
+  border-right: 1px solid rgba(148, 163, 184, 0.2);
+  padding: 20px 16px;
+  overflow-y: auto;
 }
 
 .sidebar h3 {
   margin-top: 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
 }
 
 .nav-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
   padding: 10px;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  color: var(--text);
 }
 
 .nav-item:hover {
-  background: #1f2937;
+  background: rgba(56, 189, 248, 0.16);
 }
 
-/* Content */
 .content {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-/* Tabs */
+.tabbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(15, 23, 42, 0.6);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 0 8px;
+  min-height: 48px;
+}
+
 .tabs {
   display: flex;
-  background: #e5e7eb;
-  border-bottom: 1px solid #ccc;
+  overflow-x: auto;
+  gap: 6px;
+  padding: 6px 0;
 }
 
 .tab {
-  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
   cursor: pointer;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid transparent;
 }
 
 .tab.active {
-  background: white;
-  border-bottom: 3px solid #0078d4;
+  border-color: rgba(56, 189, 248, 0.8);
+  background: rgba(56, 189, 248, 0.16);
 }
 
-/* iframe area */
+.tab-close {
+  color: var(--muted);
+  font-size: 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.tab-close:hover {
+  color: #fca5a5;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  background: rgba(56, 189, 248, 0.16);
+  color: #e0f2fe;
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
 .viewer {
   flex: 1;
+  background: rgba(15, 23, 42, 0.45);
 }
 
 iframe {
   width: 100%;
   height: 100%;
   border: none;
+  background: white;
 }
 
-/* Home cards */
 .home {
-  padding: 20px;
+  padding: 24px;
 }
+
+.hero {
+  margin-bottom: 18px;
+}
+
+.hero h2 { margin-bottom: 8px; }
+.hero p { color: var(--muted); }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 14px;
 }
 
 .card {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
+  background: linear-gradient(160deg, rgba(30,41,59,0.95), rgba(15,23,42,0.95));
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 16px;
+  border-radius: 14px;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: 0.2s;
+  box-shadow: 0 10px 24px rgba(2,6,23,0.3);
+  transition: .2s ease;
 }
 
 .card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  border-color: rgba(125, 211, 252, 0.65);
+}
+
+.card .title {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.card .desc {
+  color: #cbd5e1;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.visual {
+  margin-top: 12px;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #22d3ee, #a78bfa, #f472b6);
+  opacity: .8;
 }
 </style>
 </head>
 
 <body>
-
 <div class="topbar">
-  <h2>Fabric Tools Hub</h2>
+  <div class="brand">
+    <h2>Fabric Tools Hub</h2>
+    <span class="badge">Smart Workspace</span>
+  </div>
   <div>👤 User</div>
 </div>
 
 <div class="container">
-  
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h3>Tools</h3>
-    <div class="nav-item" onclick="openApp('migration')">Power BI Migration</div>
-    <div class="nav-item" onclick="openApp('security')">Fabric Role Assignment</div>
-    <div class="nav-item" onclick="openApp('estimator')">Project Estimator</div>
-    <div class="nav-item" onclick="openApp('requirements')">Requirements App</div>
-    <div class="nav-item" onclick="openApp('capacity')">Capacity Calculator</div>
-  </div>
+  <div class="sidebar" id="sidebar"></div>
 
-  <!-- Content -->
   <div class="content">
-    
-    <!-- Tabs -->
-    <div class="tabs" id="tabs"></div>
-
-    <!-- Viewer -->
-    <div class="viewer" id="viewer">
-      <div class="home">
-        <h2>Welcome</h2>
-        <div class="grid">
-          <div class="card" onclick="openApp('migration')">Power BI Migration</div>
-          <div class="card" onclick="openApp('security')">Fabric Role Assignment</div>
-          <div class="card" onclick="openApp('estimator')">Project Estimator</div>
-          <div class="card" onclick="openApp('requirements')">Requirements App</div>
-          <div class="card" onclick="openApp('capacity')">Capacity Calculator</div>
-        </div>
+    <div class="tabbar">
+      <div class="tabs" id="tabs"></div>
+      <div class="actions">
+        <button class="btn" onclick="goHome()">🏠 Home</button>
+        <button class="btn" onclick="closeActiveTab()">✖ Close Tab</button>
       </div>
     </div>
 
+    <div class="viewer" id="viewer"></div>
   </div>
 </div>
 
 <script>
 const apps = {
   migration: {
-    name: "Migration",
-    url: "https://qubexon-pl.github.io/ptofmigration/"
+    icon: "🚀",
+    name: "Power BI Migration",
+    url: "https://qubexon-pl.github.io/ptofmigration/",
+    desc: "Plan and execute Power BI to Fabric migration steps with guided workflow and status tracking."
   },
   security: {
-    name: "Security",
-    url: "https://qubexon-pl.github.io/fabricrolesassigment/"
+    icon: "🔐",
+    name: "Fabric Role Assignment",
+    url: "https://qubexon-pl.github.io/fabricrolesassigment/",
+    desc: "Set workspace access and role mappings quickly to secure users, teams, and data domains."
   },
   estimator: {
-    name: "Estimator",
-    url: "https://qubexon-pl.github.io/estimate/"
+    icon: "📊",
+    name: "Project Estimator",
+    url: "https://qubexon-pl.github.io/estimate/",
+    desc: "Estimate effort, budget, and timeline using adjustable assumptions for Fabric delivery projects."
   },
   requirements: {
-    name: "Requirements",
-    url: "https://qubexon-pl.github.io/requirementsapp/"
+    icon: "🧾",
+    name: "Requirements App",
+    url: "https://qubexon-pl.github.io/requirementsapp/",
+    desc: "Capture and organize business and technical requirements with structured input and traceability."
   },
   capacity: {
-    name: "Capacity",
-    url: "https://qubexon-pl.github.io/calculatorfabric/"
+    icon: "⚙️",
+    name: "Capacity Calculator",
+    url: "https://qubexon-pl.github.io/calculatorfabric/",
+    desc: "Model Fabric capacity needs and sizing options to optimize performance and cost planning."
   }
 };
 
@@ -182,39 +280,98 @@ let openTabs = [];
 let activeTab = null;
 
 function openApp(id) {
-  if (!openTabs.includes(id)) {
-    openTabs.push(id);
-  }
+  if (!openTabs.includes(id)) openTabs.push(id);
   activeTab = id;
   render();
+}
+
+function goHome() {
+  activeTab = null;
+  render();
+}
+
+function closeTab(id) {
+  openTabs = openTabs.filter(tab => tab !== id);
+  if (activeTab === id) {
+    activeTab = openTabs.length ? openTabs[openTabs.length - 1] : null;
+  }
+  render();
+}
+
+function closeActiveTab() {
+  if (activeTab) closeTab(activeTab);
+}
+
+function renderSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.innerHTML = '<h3>Tools Menu</h3>';
+
+  Object.entries(apps).forEach(([id, app]) => {
+    const nav = document.createElement("div");
+    nav.className = "nav-item";
+    nav.onclick = () => openApp(id);
+    nav.innerHTML = `<span>${app.icon}</span><span>${app.name}</span>`;
+    sidebar.appendChild(nav);
+  });
+}
+
+function homeHtml() {
+  const cards = Object.entries(apps).map(([id, app]) => `
+    <div class="card" onclick="openApp('${id}')">
+      <div class="title">${app.icon} ${app.name}</div>
+      <div class="desc">${app.desc}</div>
+      <div class="visual"></div>
+    </div>
+  `).join("");
+
+  return `
+    <div class="home">
+      <div class="hero">
+        <h2>Welcome to your Fabric command center</h2>
+        <p>Open tools in tabs, jump home anytime, and close workspaces as needed.</p>
+      </div>
+      <div class="grid">${cards}</div>
+    </div>
+  `;
 }
 
 function render() {
   const tabsEl = document.getElementById("tabs");
   const viewer = document.getElementById("viewer");
 
-  // Render Tabs
   tabsEl.innerHTML = "";
   openTabs.forEach(id => {
+    const app = apps[id];
     const tab = document.createElement("div");
     tab.className = "tab" + (id === activeTab ? " active" : "");
-    tab.innerText = apps[id].name;
     tab.onclick = () => {
       activeTab = id;
       render();
     };
+    tab.innerHTML = `
+      <span>${app.icon}</span>
+      <span>${app.name}</span>
+      <button class="tab-close" title="Close tab">✖</button>
+    `;
+    tab.querySelector(".tab-close").onclick = (event) => {
+      event.stopPropagation();
+      closeTab(id);
+    };
     tabsEl.appendChild(tab);
   });
 
-  // Render iframe
   viewer.innerHTML = "";
   if (activeTab) {
     const iframe = document.createElement("iframe");
     iframe.src = apps[activeTab].url;
     viewer.appendChild(iframe);
+  } else {
+    viewer.innerHTML = homeHtml();
   }
 }
-</script>
 
+renderSidebar();
+render();
+</script>
 </body>
 </html>
