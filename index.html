@@ -91,6 +91,7 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .tabbar {
@@ -105,6 +106,8 @@ body {
 
 .tabs {
   display: flex;
+  flex: 1;
+  min-width: 0;
   overflow-x: auto;
   gap: 6px;
   padding: 6px 0;
@@ -214,6 +217,10 @@ iframe {
   background: linear-gradient(to right, #22d3ee, #a78bfa, #f472b6);
   opacity: .8;
 }
+
+.sidebar.hidden {
+  display: none;
+}
 </style>
 </head>
 
@@ -234,7 +241,7 @@ iframe {
       <div class="tabs" id="tabs"></div>
       <div class="actions">
         <button class="btn" onclick="goHome()">🏠 Home</button>
-        <button class="btn" onclick="closeActiveTab()">✖ Close Tab</button>
+        <button class="btn" id="toggle-tools-btn" onclick="toggleSidebar()">🗂 Hide Tools</button>
       </div>
     </div>
 
@@ -298,8 +305,11 @@ function closeTab(id) {
   render();
 }
 
-function closeActiveTab() {
-  if (activeTab) closeTab(activeTab);
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const toggleBtn = document.getElementById("toggle-tools-btn");
+  const isHidden = sidebar.classList.toggle("hidden");
+  toggleBtn.textContent = isHidden ? "🗂 Show Tools" : "🗂 Hide Tools";
 }
 
 function renderSidebar() {
